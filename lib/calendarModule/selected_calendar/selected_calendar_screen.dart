@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:test/selected_calendar/selected_clander_state.dart';
+import 'package:test/calendarModule/selected_calendar/selected_clander_state.dart';
 
 class SelectedCalendarScreen extends StatelessWidget {
   @override

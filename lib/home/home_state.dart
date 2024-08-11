@@ -74,6 +74,37 @@ class HomeState extends ChangeNotifier {
     notifyListeners();
   }
 
+  //   File? galleryImage;
+  // var bytes;
+  // var fileName;
+
+  // onPickImage() async {
+  //   final image = await ImagePicker().pickImage(
+  //     source: ImageSource.gallery,
+  //     imageQuality: 25,
+  //   );
+  //   if (image != null) {
+  //     galleryImage = File(image.path);
+  //     fileName = image.path.split('/').last;
+  //     notifyListeners();
+  //   }
+  // }
+
+  //  var data = FormData.fromMap({
+  //     "id": id,
+  //     "type": "user",
+  //     "message": message,
+  //     "temporaryMsgId": temporaryMsgId,
+  //   });
+
+  //   // Add file to data if galleryImage is not null
+  //   if (galleryImage != null) {
+  //     data.files.add(MapEntry(
+  //       "file",
+  //       await MultipartFile.fromFile(galleryImage!.path, filename: fileName),
+  //     ));
+  //   }
+
   Map<String, String> _getHeaders() {
     return {
       'Authorization':
