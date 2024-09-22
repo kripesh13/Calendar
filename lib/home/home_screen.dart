@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test/home/home_form.dart';
 import 'package:test/home/home_state.dart';
+import 'package:test/loading_module/loading_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -31,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
             print(value.pageCount);
             return value.isLoading == true
                 ? const Center(
-                    child: CircularProgressIndicator(),
+                    child: LoadingScreen(),
                   )
                 : Column(
                     children: [
@@ -40,11 +42,20 @@ class _HomeScreenState extends State<HomeScreen> {
                           controller: value.scrollController,
                           itemCount: value.productModule.data?.length ?? 0,
                           itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(25.0),
-                              child: Text(
-                                  value.productModule.data?[index].name ??
-                                      "na"),
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return HomeForm();
+                                  },
+                                ));
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(25.0),
+                                child: Text(
+                                    value.productModule.data?[index].name ??
+                                        "na"),
+                              ),
                             );
                           },
                         ),

@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:test/module/product_module.dart';
 
 class HomeState extends ChangeNotifier {
@@ -8,6 +11,36 @@ class HomeState extends ChangeNotifier {
     getData(pageCount!);
     scrollController.addListener(_onScroll);
   }
+
+  bool onSubmitLoading = false;
+
+  onSumit() {
+    onSubmitLoading = true;
+    notifyListeners();
+    EasyLoading.show(status: 'loading...');
+    Future.delayed(Duration(seconds: 3), () {
+      EasyLoading.dismiss();
+    });
+    onSubmitLoading = true;
+    notifyListeners();
+  }
+
+  void updateText() async {
+    EasyLoading.show(status: 'Loading...');
+
+    // Simulate a delay for the loading process
+    await Future.delayed(Duration(seconds: 3));
+
+    // Dismiss the loading indicator
+    EasyLoading.dismiss();
+  }
+
+  // onSumit() async {
+  //   await Future.delayed(const Duration(seconds: 3), () {
+  //     onSumitLoading = true;
+  //     notifyListeners();
+  //   });
+  // }
 
   ScrollController scrollController = ScrollController();
   int? pageCount;
@@ -51,6 +84,8 @@ class HomeState extends ChangeNotifier {
     }
   }
 
+  TextEditingController nameController = TextEditingController();
+
   Future<void> getData(int pageCount) async {
     print(pageCount);
     setLoading(true);
@@ -62,6 +97,7 @@ class HomeState extends ChangeNotifier {
         options: Options(headers: _getHeaders()),
       );
       productModule = ProductModule.fromJson(response.data);
+      nameController.text = productModule.data?.first.name ?? "";
     } on DioError catch (e) {
       print('Error fetching data: ${e.response?.data}');
     } finally {
