@@ -9,7 +9,7 @@ class LocationNameProvider extends ChangeNotifier {
         List<Placemark> placemarks =
             await placemarkFromCoordinates(latitude!, longitude!);
         if (placemarks.isNotEmpty) {
-          print(placemarks);
+          
           locationName =
               '${placemarks[3].street ?? ""}, ${placemarks[2].street ?? ""}  ${placemarks[1].street ?? ""}   ${placemarks.first.country ?? ""},  ${placemarks.first.country ?? ""},';
         } else {
@@ -18,7 +18,7 @@ class LocationNameProvider extends ChangeNotifier {
       } catch (e) {
         print('Error getting location name: $e');
       }
-      notifyListeners(); // Notify listeners after location name is updated
+      notifyListeners(); 
     } else {
       print('Invalid latitude or longitude.');
     }
